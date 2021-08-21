@@ -20,6 +20,26 @@ void Motor_Stop(int ForwardPin,int BackwardPin,int SpeedPin)
   digitalWrite(BackwardPin,LOW);
   digitalWrite(SpeedPin,LOW);
 }
+
+void LED_Foraward(int ForwardInd,int BackwardInd,int StopInd)
+{
+  digitalWrite(ForwardInd,HIGH);
+  digitalWrite(BackwardInd,LOW);
+  digitalWrite(StopInd,LOW);
+}
+void LED_Backward(int ForwardInd,int BackwardInd,int StopInd)
+{
+  digitalWrite(ForwardInd,LOW);
+  digitalWrite(BackwardInd,HIGH);
+  digitalWrite(StopInd,LOW);
+}
+void LED_Stop(int ForwardInd,int BackwardInd,int StopInd)
+{
+  digitalWrite(ForwardInd,LOW);
+  digitalWrite(BackwardInd,LOW);
+  digitalWrite(StopInd,HIGH);
+}
+
 int Calculate_Time(int Angle,int Speed,int Gear)
 {
   int Time=(Angle/(Speed*6.0/(Gear)))*1000;
@@ -30,4 +50,3 @@ void Calculate_Speed(int Voltage)
   int Speed=(((Voltage/2.0)*255)/5.0);
   return Speed;
 }
-
