@@ -1,10 +1,10 @@
 #include "Modules.h"                //Including the defined library 'Modules'
 
-#define DIR_FOR               4     //Pin for forward direction
-#define DIR_BACK              5     //Pin for backward direction
-#define MOTOR_SPEED           6     //PWM pin for speed control
+#define DIR_FOR               6     //Pin for forward direction
+#define DIR_BACK              7     //Pin for backward direction
+#define MOTOR_SPEED           9     //PWM pin for speed control
 #define THRESHOLD_ANGLE       10    //Threshold angle for determining low and high speed
-#define DEC_ANGLE             5     //The angle of decelerating at high speed
+#define DEC_ANGLE             5     //The angle of decelerating at jaaa7,high speed
 #define GEARBOX_RATIO         100   //Gear box ratio
 #define MOTOR_LOW_SPEED       136   //RPM at low speed
 #define MOTOR_HIGH_SPEED      415   //RPM at high speed
