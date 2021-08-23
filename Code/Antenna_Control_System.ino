@@ -10,8 +10,8 @@
 #define MOTOR_HIGH_SPEED      415   //RPM at high speed
 #define LOW_SPEED_VOLTAGE     1     //Required voltage for low speed
 #define HIGH_SPEED_VOLTAGE    3     //Required voltage for high speed
-#define INTERRUPT_PIN1        0     //External interrupt pin1
-#define INTERRUPT_PIN2        1     //External interrupt pin2
+#define INTERRUPT_ID1         0     //External interrupt pin1
+#define INTERRUPT_ID2         1     //External interrupt pin2
 #define MIN_ANGLE            -168   //Minimum angle 
 #define MAX_ANGLE             168   //Maximum angle
 #define FOR_LED               11    //Indication for forward direction
@@ -30,8 +30,8 @@ void setup() {
   pinMode(DIR_FOR,OUTPUT);
   pinMode(DIR_BACK,OUTPUT);
   pinMode(MOTOR_SPEED,OUTPUT);
-  attachInterrupt(INTERRUPT_PIN1,Min_Limit_Reached,FALLING);
-  attachInterrupt(INTERRUPT_PIN2,Max_Limit_Reached,FALLING);
+  attachInterrupt(INTERRUPT_ID1,Min_Limit_Reached,FALLING);
+  attachInterrupt(INTERRUPT_ID2,Max_Limit_Reached,FALLING);
 
   Serial.begin(9600);               //Initalizing serial connection
 }
