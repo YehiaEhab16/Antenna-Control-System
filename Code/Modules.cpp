@@ -21,7 +21,7 @@ void Motor_Stop(int ForwardPin,int BackwardPin,int SpeedPin)
   digitalWrite(SpeedPin,LOW);
 }
 
-void LED_Foraward(int ForwardInd,int BackwardInd,int StopInd)
+void LED_Forward(int ForwardInd,int BackwardInd,int StopInd)
 {
   digitalWrite(BackwardInd,LOW);
   digitalWrite(StopInd,LOW);
@@ -53,3 +53,4 @@ int Calculate_Speed(int Voltage)
   int Speed=(((Voltage/2.0)*255)/5.0);    //Map the voltage value to the range of analog write function (0->255)
   return Speed;
 }
+
