@@ -2,8 +2,8 @@
 
 void Motor_ForwardDirection(int ForwardPin,int BackwardPin)
 {
-  digitalWrite(ForwardPin,HIGH);
   digitalWrite(BackwardPin,LOW);
+  digitalWrite(ForwardPin,HIGH);
 }
 void Motor_BackwardDirection(int ForwardPin,int BackwardPin)
 {
@@ -21,17 +21,17 @@ void Motor_Stop(int ForwardPin,int BackwardPin,int SpeedPin)
   digitalWrite(SpeedPin,LOW);
 }
 
-void LED_Foraward(int ForwardInd,int BackwardInd,int StopInd)
+void LED_Forward(int ForwardInd,int BackwardInd,int StopInd)
 {
-  digitalWrite(ForwardInd,HIGH);
   digitalWrite(BackwardInd,LOW);
   digitalWrite(StopInd,LOW);
+  digitalWrite(ForwardInd,HIGH);
 }
 void LED_Backward(int ForwardInd,int BackwardInd,int StopInd)
 {
   digitalWrite(ForwardInd,LOW);
-  digitalWrite(BackwardInd,HIGH);
   digitalWrite(StopInd,LOW);
+  digitalWrite(BackwardInd,HIGH);
 }
 void LED_Stop(int ForwardInd,int BackwardInd,int StopInd)
 {
@@ -42,11 +42,15 @@ void LED_Stop(int ForwardInd,int BackwardInd,int StopInd)
 
 int Calculate_Time(int Angle,int Speed,int Gear)
 {
-  int Time=(Angle/(Speed*6.0/(Gear)))*1000;
+  //Dividng angle by angle per speed
+  int Time=(Angle/(Speed*6.0/(Gear)))*1000;   //Angle per speed = RPM *360/60 /Gear
+  //Multiply by 1000 to convert to milliseconds
   return Time;
 }
-void Calculate_Speed(int Voltage)
+int Calculate_Speed(int Voltage)
 {
-  int Speed=(((Voltage/2.0)*255)/5.0);
+  //Divide voltage by 2 due to OP_Amp amplification
+  int Speed=(((Voltage/2.0)*255)/5.0);    //Map the voltage value to the range of analog write function (0->255)
   return Speed;
 }
+
