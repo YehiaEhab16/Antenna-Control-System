@@ -53,4 +53,3 @@ int Calculate_Speed(int Voltage)
   int Speed=(((Voltage/2.0)*255)/5.0);    //Map the voltage value to the range of analog write function (0->255)
   return Speed;
 }
-
