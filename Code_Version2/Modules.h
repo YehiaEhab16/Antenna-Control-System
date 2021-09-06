@@ -1,4 +1,4 @@
-#ifndef MODULES_H_
+##ifndef MODULES_H_
 #define MODULES_H_
 
 #define DIR_FOR               6     //Pin for forward direction
@@ -18,16 +18,22 @@
 #define FOR_LED               12    //Indication for forward direction
 #define BACK_LED              13    //Indication for backward direction
 #define STOP_LED              11    //Indication for stopping motor
+#define RX                    9     //RX for bluetooth module
+#define TX                    10    //TX for bluetooth module
 
+
+//Motor Functions
 void Motor_ForwardDirection(int ForwardPin,int BackwardPin);
 void Motor_BackwardDirection(int ForwardPin,int BackwardPin);
 void Motor_SetSpeed(int SpeedPin,int Speed);
 void Motor_Stop(int ForwardPin,int BackwardPin,int SpeedPin);
 
+//LED Functions
 void LED_Forward(int ForwardInd,int BackwardInd,int StopInd);
 void LED_Backward(int ForwardInd,int BackwardInd,int StopInd);
 void LED_Stop(int ForwardInd,int BackwardInd,int StopInd);
 
+//Calculate Functions
 int Calculate_Time(int Angle,int Speed,int Gear);
 int Calculate_Speed(int Voltage);
 
