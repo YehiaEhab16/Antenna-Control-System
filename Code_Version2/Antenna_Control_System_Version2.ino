@@ -1,32 +1,46 @@
+#include <SoftwareSerial.h>         //Including SoftwareSerial library to connect with bluetooth module
 #include "Modules.h"                //Including the defined library 'Modules'
 #include "App_Functions.h"          //Including the defined library 'App_Functions'
 
+//Bluetooth module for Mobile Application
+SoftwareSerial mySerial(RX, TX);
+
 //Declaration of global variables
 int CurrentAngle=0,DesiredAngle,DiffAngle,Time,Speed;
-String inputString = "";
-bool stringComplete = false;
+String inputString = "";        //Variable that holds the recieved string
+bool stringComplete = false;    //Flag to indicate recieving of string from application or LabView
 
-//ISR for external interrupt
+//ISRs for external interrupt
 void Min_Limit_Reached();
 void Max_Limit_Reached();
 
 void setup() {
   //Initalizing needed pins as output
   Initialize();
-  
+
+  //Attaching interrupts at pins 0&1
   attachInterrupt(INTERRUPT_ID1,Min_Limit_Reached,RISING);
   attachInterrupt(INTERRUPT_ID2,Max_Limit_Reached,RISING);
 
-  Serial.begin(9600);               //Initalizing serial connection
+  //Initalizing serial & software serial connection
+  mySerial.begin(9600);   
+  Serial.begin(9600);
   Serial.println("Initializing CODE...");
 }
 
 void loop() {
-  if (stringComplete)
+  //Checking data from applcation
+   if(mySerial.available())
   {
-    DesiredAngle = inputString.toInt();
-    inputString = "";
-    stringComplete = false;
+    inputString=mySerial.readString();
+    Serial.println("Mobile Application Mode");
+    stringComplete=true;
+  }
+  if (stringComplete) //Checking for flag
+  {
+    DesiredAngle = inputString.toInt();     //Converting to integer
+    inputString = "";                       //Clearing string
+    stringComplete = false;                 //Clearing Flag
     DiffAngle = DesiredAngle - CurrentAngle;//Calculating difference between desired and current angle
     Serial.print("Angle=");
     Serial.println(abs(DiffAngle));
@@ -71,7 +85,7 @@ void loop() {
       }
       Stop();
     }
-    CurrentAngle=DesiredAngle;    //Updating current angle after the operation
+    CurrentAngle=DesiredAngle;    //Updating current angle after reaching desired position
   }
 }
 
@@ -79,20 +93,23 @@ void loop() {
 void serialEvent() 
 {
   while (Serial.available()) {
-    char inChar = (char)Serial.read();
-    if (inChar == '#') 
+    char inChar = (char)Serial.read();   //Reading character from serial
+    if (inChar == '#')                   //Checking for stop bit '#'
     {
-      stringComplete = true;
+      Serial.println("LabView GUI Mode");
+      stringComplete = true;             //Setting flag to indicate recieving of string
     }
     if(!stringComplete)
-      inputString += inChar;
+      inputString += inChar;            //Concatenating string until reaching full message
   }
 }
 
+//ISR when reaching minimum limit
 void Min_Limit_Reached()
 {
   Min_Interrupt();
 }
+//ISR when reaching minimum limit
 void Max_Limit_Reached()
 {
   Max_Interrupt();
