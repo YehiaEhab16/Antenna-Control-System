@@ -116,7 +116,7 @@ void Min_Limit_Reached()
   Speed=0;
   DesiredAngle=MIN_ANGLE;
 }
-//ISR when reaching minimum limit
+//ISR when reaching maximum limit
 void Max_Limit_Reached()
 {
   Serial.println("Max Interrupt");
