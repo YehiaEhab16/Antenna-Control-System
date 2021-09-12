@@ -4,7 +4,7 @@
 
 //Define Variables we'll be connecting to
 double DesiredAngle=0, CurrentAngle=0,DiffAngle;
-volatile Output;
+volatile double Output;
 
 //Specify the links and initial tuning parameters
 double Kp=2, Ki=0, Kd=0.1;
