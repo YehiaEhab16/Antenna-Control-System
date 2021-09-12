@@ -5,7 +5,8 @@
 SoftwareSerial mySerial(RX, TX);
 
 //Declaration of global variables
-int CurrentAngle=0,DesiredAngle,DiffAngle,Speed,Time,TotalTime=0,FinalAngle=0;
+int CurrentAngle=0,DesiredAngle,TotalTime=0,FinalAngle=0;
+volatile int DiffAngle,Speed,Time;
 String inputString = "";        //Variable that holds the recieved string
 bool stringComplete = false,dir_flag=FORWARD,speed_flag=LOW_SPEED_OP,src_flag=APP;    //Flag to indicate recieving of string from application or LabView
 
@@ -28,7 +29,7 @@ void setup()
 
 void loop() {
   //Checking data from applcation
-   if(mySerial.available())
+   while(mySerial.available())
   {
     inputString=mySerial.readString();
     src_flag=APP;         //Flag to indicate that the sender is mobile application 
@@ -108,22 +109,22 @@ void serialEvent()
 //ISR when reaching minimum limit
 void Min_Limit_Reached()
 {
-  Serial.println("Min Interrupt");
-  Motor_Stop();
-  LED_Stop();
+  Serial.println("Min Interrupt, Angle=-168");
+  Stop();
   Serial.println("STOP MOTOR");
   DiffAngle=0;
   Speed=0;
+  Time=0;
   DesiredAngle=MIN_ANGLE;
 }
 //ISR when reaching maximum limit
 void Max_Limit_Reached()
 {
-  Serial.println("Max Interrupt");
-  Motor_Stop();
-  LED_Stop();
+  Serial.println("Max Interrupt, Angle=168");
+  Stop();
   Serial.println("STOP MOTOR");
   DiffAngle=0;
   Speed=0;
+  Time=0;
   DesiredAngle=MAX_ANGLE;
 }
