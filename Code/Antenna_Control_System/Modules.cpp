@@ -57,7 +57,7 @@ int Calculate_Speed(int Voltage)
   return Speed;
 }
 
-void Init()
+void Init(void)
 {
   //Initalizing needed pins as output
   pinMode(DIR_FOR,OUTPUT);
