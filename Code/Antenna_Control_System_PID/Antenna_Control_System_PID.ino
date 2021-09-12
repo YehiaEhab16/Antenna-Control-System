@@ -3,10 +3,11 @@
 #include "PID_v1.h"                 //Including the defined library 'PID_v1.h'
 
 //Define Variables we'll be connecting to
-double DesiredAngle=0, CurrentAngle=0, Output,DiffAngle;
+double DesiredAngle=0, CurrentAngle=0,DiffAngle;
+volatile Output;
 
 //Specify the links and initial tuning parameters
-double Kp=2, Ki=0.001, Kd=0;
+double Kp=2, Ki=0, Kd=0.1;
 
 //Creating object from PID library
 PID myPID(&CurrentAngle, &Output, &DesiredAngle, Kp, Ki, Kd, DIRECT);
